@@ -17,7 +17,7 @@
 
       <div class="mb-12 flex justify-between">
         <h1 class="font-bold text-lg">HTML to Temple</h1>
-        <h2 class="italic text-gray-600">Built fast, provided as is.</h2>
+        <h2>Convert HTML snippets go Temple/Elixir code.</h2>
       </div>
 
       <div class="flex-1 mb-12">
@@ -25,7 +25,7 @@
         <h1 class="font-bold mb-1">HTML</h1>
         <h2 class="mb-8">Shorter snippets may be more useful. Upates on keydown or if pasting, on click away.</h2>
         </div>
-        <textarea class="w-full bg-gray-900 p-2" x-ref="input" @change="translate($refs.input, $refs.output)" @keydown="translate($refs.input, $refs.output)" id="input" name="" cols="30" rows="10"></textarea>
+        <textarea class="w-full bg-gray-900 p-2 font-mono" x-ref="input" @change="translate($refs.input, $refs.output)" @keydown="translate($refs.input, $refs.output)" id="input" name="" cols="30" rows="10"></textarea>
       </div>
 
       <div class="flex-1">
@@ -33,19 +33,21 @@
         <h1 class="font-bold mb-1">Temple</h1>
         <h2 class=" mb-8">Provided as best effort, applying <pre class="px-1 text-sm inline">mix format</pre> is recommended. Open your browser console to see (unhelpful) errors.</h2>
         </div>
-        <textarea class="w-full bg-gray-900 p-2"
+        <textarea class="w-full bg-gray-900 p-2 font-mono"
           id="output" name="" cols="30" rows="10" x-ref="output"></textarea>
       </div>
 
       <div class="italic mt-12 text-gray-600">
         Thank you, <a class="text-gray-500 hover:text-gray-300 transition" href="https://github.com/tree-sitter/tree-sitter" title="Tree-sitter">Tree-sitter</a>,
-        <a class="text-gray-500 hover:text-gray-300 transition" href="https://github.com/tree-sitter/tree-sitter-html" title="Tree-sitter">Tree-sitter HTML</a> and
+        <a class="text-gray-500 hover:text-gray-300 transition" href="https://github.com/tree-sitter/tree-sitter-html" title="Tree-sitter HTML">Tree-sitter HTML</a> and
         <a class="text-gray-500 hover:text-gray-300 transition" href="https://github.com/mhanberg/temple" title="Temple">Temple</a>.
 
       </div>
 
       <div class="italic mt-4 text-gray-600">
-         See <a class="text-gray-500 hover:text-gray-300 transition" href="https://github.com/rktjmp/html-to-temple/" title="Oliver Mariott">rktjmp/html-to-temple</a>.
+
+         See <a class="text-gray-500 hover:text-gray-300 transition" href="https://github.com/rktjmp/html-to-temple/" title="Oliver Mariott">rktjmp/html-to-temple</a>, built roughly, adjust expectations accordingly.
+
       </div>
     </div>
   </body>
