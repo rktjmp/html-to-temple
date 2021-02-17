@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/html-to-temple/assets/favicon.17e50649.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
+  <script type="module" crossorigin src="/html-to-temple/assets/index.1a1e00c4.js"></script>
+  <link rel="modulepreload" href="/html-to-temple/assets/vendor.780cc7e6.js">
+  <link rel="stylesheet" href="/html-to-temple/assets/index.6d544d9b.css">
+</head>
+  <body>
+    <div id="app" x-data>
+      <div class="input">
+
+      html
+      <textarea x-ref="input" @keyup="translate($refs.input, $refs.output)" id="input" name="" cols="30" rows="10"></textarea>
+      </div>
+
+      temple
+      <div class="output">
+      <textarea id="output" name="" cols="30" rows="10" x-ref="output"></textarea>
+      </div>
+    </div>
+    
+  </body>
+</html>
