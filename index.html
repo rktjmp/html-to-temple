@@ -13,7 +13,7 @@
   </head>
   <body class="bg-gray-900 text-gray-300">
 
-    <div id="app" class="bg-gray-800 w-2/3 rounded shadow border-t border-gray-700 flex flex-col mx-auto my-12 p-16" x-data x-init="() => window.translate($refs.input, $refs.output)">
+    <div id="app" class="bg-gray-800 w-2/3 rounded shadow border-t border-gray-700 flex flex-col mx-auto my-12 p-16" x-data="{input: null}" x-init="$watch('input', () => window.translate($refs.input, $refs.output))">
 
       <div class="mb-12 flex justify-between">
         <h1 class="font-bold text-lg">HTML to Temple</h1>
@@ -25,7 +25,7 @@
         <h1 class="font-bold mb-1">HTML</h1>
         <h2 class="mb-8">Shorter snippets may be more useful. Upates on keydown or if pasting, on click away.</h2>
         </div>
-        <textarea class="w-full bg-gray-900 p-2 font-mono" x-ref="input" @change="translate($refs.input, $refs.output)" @keydown="translate($refs.input, $refs.output)" id="input" name="" cols="30" rows="10"></textarea>
+        <textarea class="w-full bg-gray-900 rounded p-2 font-mono" x-model="input" x-ref="input" id="input" name="" cols="30" rows="10"></textarea>
       </div>
 
       <div class="flex-1">
@@ -33,7 +33,7 @@
         <h1 class="font-bold mb-1">Temple</h1>
         <h2 class=" mb-8">Provided as best effort, applying <pre class="px-1 text-sm inline">mix format</pre> is recommended. Open your browser console to see (unhelpful) errors.</h2>
         </div>
-        <textarea class="w-full bg-gray-900 p-2 font-mono"
+        <textarea autocomplete="off" class="rounded w-full bg-gray-900 p-2 font-mono"
           id="output" name="" cols="30" rows="10" x-ref="output"></textarea>
       </div>
 
