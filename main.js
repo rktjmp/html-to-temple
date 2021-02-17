@@ -78,15 +78,79 @@ const reduce = (node, builder) => {
   }
 }
 
+const attributesToTemple = (attributes) => {
+  return attributes.map((attribute) => {
+    // - to _
+    // TODO: wrap in quotes if req
+    return [
+     attribute.name.replaceAll("-", "_"),
+     ": ",
+     '"',
+      attribute.value,
+     '"',
+    ].join("")
+  })
+}
+
+const toTemple = (tree) => {
+  const attributes = attributesToTemple(tree.attributes)
+  const openWith = tree.name
+  let doBlock = () => "unset"
+  if (tree.children.length == 0) {
+    doBlock = () => []
+  }
+  else {
+    doBlock = () => {
+      return ["do", tree.children.map(toTemple), "end"]
+    }
+  }
+  return [tree.name, attributes.join(" "), doBlock()]
+}
+
+const templeToString = (tree, indent = "", lines = []) => {
+  const tag = [tree[0], tree[1]]
+  if (indent != "") {
+    // "" joined with " " will muck up first indent level indentation
+    tag.reverse().push(indent)
+    tag.reverse()
+  }
+  let block = ""
+  if (tree[2].length > 0) { 
+    tag.push([indent, tree[2][0]].join("")) // do
+    lines.push(tag.join(" "))
+    tree[2][1].map((inner) => {
+      const inner_lines = templeToString(inner, indent + "  ")
+      inner_lines.map((l) => lines.push(l))
+    })
+    lines.push([indent, tree[2][2]].join("")) // end
+  }
+  else {
+    lines.push(tag.join(" "))
+  }
+  return lines
+}
+
 Parser.init().then(async () => {
   const parser = new Parser;
   const HTML = await Parser.Language.load('tree-sitter-html.wasm');
   parser.setLanguage(HTML);
-  const sourceCode = '<div id="my_id" class="flex flex-row">a link to <a href="google.com">text content</a> balls </div>'
-  // const sourceCode = '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 14l9-5-9-5-9 5 9 5z"></path><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"></path></svg>'
- const tree = parser.parse(sourceCode);
-  console.log(reduce(tree.rootNode, {name: "__root__", children: []}))
- console.log(tree.rootNode.toString());
+  const sourceCode = '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 14l9-5-9-5-9 5 9 5z"></path><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"></path></svg>'
+
+  const tree = parser.parse(sourceCode);
+  console.log(tree.rootNode.toString());
+
+  const reduced = reduce(tree.rootNode, {name: "__root__", children: []})
+  console.log(reduced.children)
+
+  const temple = reduced.children.map(toTemple)
+  console.log(temple)
+
+  // assume only one root node TODO 
+  const lines = templeToString(temple[0], "")
+  console.log(lines)
+
+  console.log(lines.join("\n"))
+
 // const callExpression = tree.rootNode.child(0).firstChild;
 // console.log(callExpression);
 })
