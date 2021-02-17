@@ -5,10 +5,11 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
+    <script type="module" src="/main.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
   </head>
   <body>
-    <div id="app" x-data>
+    <div id="app" x-data x-init="() => window.translate($refs.input, $refs.output)">
       <div class="input">
 
       html
@@ -20,6 +21,5 @@
       <textarea id="output" name="" cols="30" rows="10" x-ref="output"></textarea>
       </div>
     </div>
-    <script type="module" src="/main.js"></script>
   </body>
 </html>

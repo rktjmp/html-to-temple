@@ -56,7 +56,7 @@ const reduce = (node, builder) => {
       builder.name = emitted.value
       return
     case "text":
-      builder.children.push({type: "text", text: emitted.value})
+      builder.children.push({type: "text", attributes: [], children: [],  value: emitted.value})
       return
     case "attribute":
       // Tree, contains a name and value
@@ -93,6 +93,12 @@ const attributesToTemple = (attributes) => {
 }
 
 const toTemple = (tree) => {
+  if (tree.type == "text") {
+    if (tree.value.match(/^\s*$/)) {
+      return null
+    }
+    return ["\"" + tree.value + "\"", "", []]
+  }
   const attributes = attributesToTemple(tree.attributes)
   const openWith = tree.name
   let doBlock = () => "unset"
@@ -108,6 +114,8 @@ const toTemple = (tree) => {
 }
 
 const templeToString = (tree, indent = "", lines = []) => {
+  // hack for all white space text objects
+  if (tree == null) { return lines }
   const tag = [tree[0], tree[1]]
   if (indent != "") {
     // "" joined with " " will muck up first indent level indentation
@@ -134,7 +142,7 @@ window.translate = function (input_el, output_el) {
 Parser.init().then(async () => {
   // get input code
   const input = input_el.value
-  console.log(input)
+  console.log("input: ", input)
 
   // attempt to translate
   const parser = new Parser;
@@ -143,17 +151,17 @@ Parser.init().then(async () => {
   const sourceCode = input
 
   const tree = parser.parse(sourceCode);
-  console.log(tree.rootNode.toString());
+  console.log("tr-parse: ", tree.rootNode.toString());
 
   const reduced = reduce(tree.rootNode, {name: "__root__", children: []})
-  console.log(reduced.children)
+  console.log("reduce: ", reduced.children)
 
   const temple = reduced.children.map(toTemple)
-  console.log(temple)
+  console.log("toTemple: ", temple)
 
   // assume only one root node TODO 
-  const lines = templeToString(temple[0], "")
-  console.log(lines)
+  const lines = temple.flatMap((line) => templeToString(line, ""))
+  console.log("lines: ", lines)
 
   console.log(lines.join("\n"))
 
@@ -162,8 +170,4 @@ Parser.init().then(async () => {
   // output
   output_el.value = lines.join("\n")
 })
-
-
-  
-
 }
