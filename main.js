@@ -104,7 +104,7 @@ const toTemple = (tree) => {
       return ["do", tree.children.map(toTemple), "end"]
     }
   }
-  return [tree.name, attributes.join(" "), doBlock()]
+  return [tree.name, attributes.join(", "), doBlock()]
 }
 
 const templeToString = (tree, indent = "", lines = []) => {

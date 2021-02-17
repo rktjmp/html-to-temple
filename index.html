@@ -12,7 +12,7 @@
       <div class="input">
 
       html
-      <textarea x-ref="input" @keyup="translate($refs.input, $refs.output)" id="input" name="" cols="30" rows="10"></textarea>
+      <textarea x-ref="input" @change="translate($refs.input, $refs.output)" @keydown="translate($refs.input, $refs.output)" id="input" name="" cols="30" rows="10"></textarea>
       </div>
 
       temple
