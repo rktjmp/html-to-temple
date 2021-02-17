@@ -5,20 +5,47 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans&family=IBM+Plex+Serif&display=swap" rel="stylesheet"> 
     <script type="module" src="/main.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
   </head>
-  <body>
-    <div id="app" x-data x-init="() => window.translate($refs.input, $refs.output)">
-      <div class="input">
+  <body class="bg-gray-900 text-gray-300">
 
-      html
-      <textarea x-ref="input" @change="translate($refs.input, $refs.output)" @keydown="translate($refs.input, $refs.output)" id="input" name="" cols="30" rows="10"></textarea>
+    <div id="app" class="bg-gray-800 w-2/3 rounded shadow border-t border-gray-700 flex flex-col mx-auto my-12 p-16" x-data x-init="() => window.translate($refs.input, $refs.output)">
+
+      <div class="mb-12 flex justify-between">
+        <h1 class="font-bold text-lg">HTML to Temple</h1>
+        <h2 class="italic text-gray-600">Built fast, provided as is.</h2>
       </div>
 
-      temple
-      <div class="output">
-      <textarea id="output" name="" cols="30" rows="10" x-ref="output"></textarea>
+      <div class="flex-1 mb-12">
+        <div class="">
+        <h1 class="font-bold mb-1">HTML</h1>
+        <h2 class="mb-8">Shorter snippets may be more useful. Upates on keydown or if pasting, on click away.</h2>
+        </div>
+        <textarea class="w-full bg-gray-900 p-2" x-ref="input" @change="translate($refs.input, $refs.output)" @keydown="translate($refs.input, $refs.output)" id="input" name="" cols="30" rows="10"></textarea>
+      </div>
+
+      <div class="flex-1">
+        <div class="">
+        <h1 class="font-bold mb-1">Temple</h1>
+        <h2 class=" mb-8">Provided as best effort, applying <pre class="px-1 text-sm inline">mix format</pre> is recommended. Open your browser console to see (unhelpful) errors.</h2>
+        </div>
+        <textarea class="w-full bg-gray-900 p-2"
+          id="output" name="" cols="30" rows="10" x-ref="output"></textarea>
+      </div>
+
+      <div class="italic mt-12 text-gray-600">
+        Thank you, <a class="text-gray-500 hover:text-gray-300 transition" href="https://github.com/tree-sitter/tree-sitter" title="Tree-sitter">Tree-sitter</a>,
+        <a class="text-gray-500 hover:text-gray-300 transition" href="https://github.com/tree-sitter/tree-sitter-html" title="Tree-sitter">Tree-sitter HTML</a> and
+        <a class="text-gray-500 hover:text-gray-300 transition" href="https://github.com/mhanberg/temple" title="Temple">Temple</a>.
+
+      </div>
+
+      <div class="italic mt-4 text-gray-600">
+         See <a class="text-gray-500 hover:text-gray-300 transition" href="https://github.com/rktjmp/html-to-temple/" title="Oliver Mariott">rktjmp/html-to-temple</a>.
       </div>
     </div>
   </body>
