@@ -4,23 +4,23 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/html-to-temple/assets/favicon.17e50649.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>HTML to Temple</title>
 
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans&family=IBM+Plex+Serif&display=swap" rel="stylesheet"> 
     
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
-  <script type="module" crossorigin src="/html-to-temple/assets/index.5f21dbd1.js"></script>
+  <script type="module" crossorigin src="/html-to-temple/assets/index.6ca785d8.js"></script>
   <link rel="modulepreload" href="/html-to-temple/assets/vendor.780cc7e6.js">
-  <link rel="stylesheet" href="/html-to-temple/assets/index.0f1a00eb.css">
+  <link rel="stylesheet" href="/html-to-temple/assets/index.d6f1830a.css">
 </head>
   <body class="bg-gray-900 text-gray-300">
 
-    <div id="app" class="bg-gray-800 w-2/3 rounded shadow border-t border-gray-700 flex flex-col mx-auto my-12 p-16" x-data x-init="() => window.translate($refs.input, $refs.output)">
+    <div id="app" class="bg-gray-800 w-2/3 rounded shadow border-t border-gray-700 flex flex-col mx-auto my-12 p-16" x-data="{input: null}" x-init="$watch('input', () => window.translate($refs.input, $refs.output))">
 
       <div class="mb-12 flex justify-between">
         <h1 class="font-bold text-lg">HTML to Temple</h1>
-        <h2 class="italic text-gray-600">Built fast, provided as is.</h2>
+        <h2>Convert HTML snippets go Temple/Elixir code.</h2>
       </div>
 
       <div class="flex-1 mb-12">
@@ -28,7 +28,7 @@
         <h1 class="font-bold mb-1">HTML</h1>
         <h2 class="mb-8">Shorter snippets may be more useful. Upates on keydown or if pasting, on click away.</h2>
         </div>
-        <textarea class="w-full bg-gray-900 p-2" x-ref="input" @change="translate($refs.input, $refs.output)" @keydown="translate($refs.input, $refs.output)" id="input" name="" cols="30" rows="10"></textarea>
+        <textarea class="w-full bg-gray-900 rounded p-2 font-mono" x-model="input" x-ref="input" id="input" name="" cols="30" rows="10"></textarea>
       </div>
 
       <div class="flex-1">
@@ -36,19 +36,21 @@
         <h1 class="font-bold mb-1">Temple</h1>
         <h2 class=" mb-8">Provided as best effort, applying <pre class="px-1 text-sm inline">mix format</pre> is recommended. Open your browser console to see (unhelpful) errors.</h2>
         </div>
-        <textarea class="w-full bg-gray-900 p-2"
+        <textarea autocomplete="off" class="rounded w-full bg-gray-900 p-2 font-mono"
           id="output" name="" cols="30" rows="10" x-ref="output"></textarea>
       </div>
 
       <div class="italic mt-12 text-gray-600">
         Thank you, <a class="text-gray-500 hover:text-gray-300 transition" href="https://github.com/tree-sitter/tree-sitter" title="Tree-sitter">Tree-sitter</a>,
-        <a class="text-gray-500 hover:text-gray-300 transition" href="https://github.com/tree-sitter/tree-sitter-html" title="Tree-sitter">Tree-sitter HTML</a> and
+        <a class="text-gray-500 hover:text-gray-300 transition" href="https://github.com/tree-sitter/tree-sitter-html" title="Tree-sitter HTML">Tree-sitter HTML</a> and
         <a class="text-gray-500 hover:text-gray-300 transition" href="https://github.com/mhanberg/temple" title="Temple">Temple</a>.
 
       </div>
 
       <div class="italic mt-4 text-gray-600">
-         See <a class="text-gray-500 hover:text-gray-300 transition" href="https://github.com/rktjmp/html-to-temple/" title="Oliver Mariott">rktjmp/html-to-temple</a>.
+
+         See <a class="text-gray-500 hover:text-gray-300 transition" href="https://github.com/rktjmp/html-to-temple/" title="Oliver Mariott">rktjmp/html-to-temple</a>, built roughly, adjust expectations accordingly.
+
       </div>
     </div>
   </body>
