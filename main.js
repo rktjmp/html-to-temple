@@ -130,11 +130,17 @@ const templeToString = (tree, indent = "", lines = []) => {
   return lines
 }
 
+window.translate = function (input_el, output_el) {
 Parser.init().then(async () => {
+  // get input code
+  const input = input_el.value
+  console.log(input)
+
+  // attempt to translate
   const parser = new Parser;
   const HTML = await Parser.Language.load('tree-sitter-html.wasm');
   parser.setLanguage(HTML);
-  const sourceCode = '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 14l9-5-9-5-9 5 9 5z"></path><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"></path></svg>'
+  const sourceCode = input
 
   const tree = parser.parse(sourceCode);
   console.log(tree.rootNode.toString());
@@ -153,10 +159,11 @@ Parser.init().then(async () => {
 
 // const callExpression = tree.rootNode.child(0).firstChild;
 // console.log(callExpression);
+  // output
+  output_el.value = lines.join("\n")
 })
 
 
-document.querySelector('#app').innerHTML = `
-  <h1>Hello Vite!</h1>
-  <a href="https://vitejs.dev/guide/features.html" target="_blank">Documentation</a>
-`
+  
+
+}

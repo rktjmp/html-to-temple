@@ -5,9 +5,21 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
+     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app" x-data>
+      <div class="input">
+
+      html
+      <textarea x-ref="input" @keyup="translate($refs.input, $refs.output)" id="input" name="" cols="30" rows="10"></textarea>
+      </div>
+
+      temple
+      <div class="output">
+      <textarea id="output" name="" cols="30" rows="10" x-ref="output"></textarea>
+      </div>
+    </div>
     <script type="module" src="/main.js"></script>
   </body>
 </html>
